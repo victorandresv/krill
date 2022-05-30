@@ -1,4 +1,4 @@
-## Authentication System
+## Spring Boot API Authentication System
 
 ### Run for development
 ```shell
