@@ -2,37 +2,21 @@ version: "3.2"
 
 services:
 
-  mariadb:
-    container_name: krill-mariadb
-    image: mariadb:10.8.2-focal
-    volumes:
-      - ./db/krill-mariadb-data:/var/lib/mysql
-    networks:
-      - krill_network
-    ports:
-      - 3348:3306
-    environment:
-      - MARIADB_ROOT_PASSWORD=ANf3Mgx6nseCbZpu
-      - MARIADB_USER=krill
-      - MARIADB_PASSWORD=U9PWLHvSWFftvDkn
-      - MARIADB_DATABASE=krill
-
   krill:
     container_name: krill-springboot
     image: adoptopenjdk/openjdk11:alpine-jre
-    networks:
-      - krill_network
     volumes:
       - ../krill/target/:/app
     command: java -jar /app/krill-0.0.1-SNAPSHOT.jar
     ports:
       - 8282:8080
     environment:
-      - JDBC=jdbc:mysql://krill-mariadb:3348/krill
-      - MYSQL_USER=krill
-      - MYSQL_PASS=U9PWLHvSWFftvDkn
+      - JDBC=jdbc:mysql://172.23.0.2:3306/krill
+      - MYSQL_USER=root
+      - MYSQL_PASS=ANf3Mgx6nseCbZpu
 
 
 networks:
-  krill_network:
-    driver: bridge
+  default:
+    external:
+      name: databases_default_network

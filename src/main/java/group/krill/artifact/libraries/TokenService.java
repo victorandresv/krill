@@ -1,5 +1,8 @@
 package group.krill.artifact.libraries;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,9 +12,9 @@ import java.net.URL;
 
 public class TokenService {
 
-    public static String CreateToken(Long id) {
+    public String CreateToken(Long id) {
         try {
-            URL url = new URL("http://localhost:3500/generate/"+id);
+            URL url = new URL("http://172.23.0.6:3500/generate/"+id);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             if (conn.getResponseCode() != 200) {

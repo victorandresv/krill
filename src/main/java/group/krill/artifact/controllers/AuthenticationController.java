@@ -36,10 +36,13 @@ public class AuthenticationController {
         AuthenticationModel authenticationModel = authenticationService.Signin(data.getUser(), data.getPass());
         try {
             if(authenticationModel.getId() > 0){
-                String token = TokenService.CreateToken(authenticationModel.getId());
+                TokenService tokenService = new TokenService();
+                String token = tokenService.CreateToken(authenticationModel.getId());
                 return new TokenModel(token);
             }
-        } catch (Exception ignored) { }
+        } catch (Exception error) {
+            System.out.println(error.getMessage());
+        }
         return new TokenModel("");
     }
 }
