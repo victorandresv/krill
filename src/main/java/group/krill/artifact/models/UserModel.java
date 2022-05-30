@@ -1,23 +1,30 @@
 package group.krill.artifact.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "clients")
-public class ClientModel {
+@Table(name = "users")
+public class UserModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private String id;
+    private Long id;
     private String first_name;
     private String last_name;
     private String email;
     private String phone;
+    private String type;
 
-    public ClientModel() {
+    public UserModel() {
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public void setFirst_name(String first_name) {
@@ -40,7 +47,7 @@ public class ClientModel {
         return email;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
@@ -56,7 +63,7 @@ public class ClientModel {
         this.phone = phone;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

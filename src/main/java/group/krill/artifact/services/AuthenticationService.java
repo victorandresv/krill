@@ -1,7 +1,6 @@
 package group.krill.artifact.services;
 
 import group.krill.artifact.models.AuthenticationModel;
-import group.krill.artifact.models.ClientModel;
 import group.krill.artifact.repositories.AuthenticationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
