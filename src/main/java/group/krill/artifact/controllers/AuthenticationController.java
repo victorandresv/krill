@@ -38,11 +38,12 @@ public class AuthenticationController {
             if(authenticationModel.getId() > 0){
                 TokenService tokenService = new TokenService();
                 String token = tokenService.CreateToken(authenticationModel.getId());
-                return new TokenModel(token);
+                return new TokenModel(token, true, null);
+            } else {
+                return new TokenModel("", false, "Signin incorrect");
             }
         } catch (Exception error) {
-            System.out.println(error.getMessage());
+            return new TokenModel("", false, error.getMessage());
         }
-        return new TokenModel("");
     }
 }
